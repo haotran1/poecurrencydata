@@ -14,3 +14,19 @@
 
 ### Getting Started
 
+```python
+import folium
+import requests
+import pandas
+import numpy as np
+import math
+
+arrest_table = pandas.read_csv("http://www.hcbravo.org/IntroDataSci/misc/BPD_Arrests.csv")
+
+arrest_table = arrest_table[pandas.notnull(arrest_table["Location 1"])]
+
+arrest_table["lat"], arrest_table["long"] = arrest_table["Location 1"].str.split(",").str
+arrest_table["lat"] = arrest_table["lat"].str.replace("(", "").astype(float)
+arrest_table["long"] = arrest_table["long"].str.replace(")", "").astype(float)
+arrest_table
+```
