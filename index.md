@@ -1,4 +1,5 @@
 # An Analysis of the Path of Exile League Economy
+![]($$$$$.png)
 
 ### Introduction
 
