@@ -11,3 +11,6 @@
 <p> Another thing to note is that in PoE, people tend to pay for convenience. Unlike most	games, there is not actual in-game designated marketplace. People have to search up on a 3rd party website, for what they want, then message the player for it, and then go to their “hideout” to trade with them. This makes it so that people who want to buy bulk amounts of items, tend to pay a premium to spare them the inconvenience of having to go out of their way to complete multiple trades with different people. 
 </p>
 > An example of this would be that if you wanted to buy 1000 pencils online and there were only 2 listings in existence. The first is that you could buy all 1000 pencils in 1 transaction for $1000, or you could buy 1 pencil at a time for $0.95. While some people would be ok with wasting time clicking 1000 times, a lot of people would just pay the extra $50 to spare them the pain. 
+
+### Getting Started
+
