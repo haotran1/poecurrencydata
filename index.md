@@ -113,10 +113,11 @@ legion.head()
 
 <p>
 The above table is the dataset for the Legion League. The columns are:
+</p>
  - League
  - Date
  - Get: What the buyer is trying to buy
  - Pay: The currency with which the buyer is paying in
  - Value: How many of the currency the buyer must pay for 1 of the "Get" item
  - Confidence: Poeninja's confidence in the value
-</p>
+
