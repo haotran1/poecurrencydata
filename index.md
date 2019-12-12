@@ -17,19 +17,97 @@ Poeninja is a webstie which has been logging trade data for each league since 20
 
 ### Getting Started
 
+<p> We are going to be utilizing the following imported libraries
+ </p>
 ```python
-import folium
-import requests
-import pandas
+import pandas as pd
 import numpy as np
-import math
-
-arrest_table = pandas.read_csv("http://www.hcbravo.org/IntroDataSci/misc/BPD_Arrests.csv")
-
-arrest_table = arrest_table[pandas.notnull(arrest_table["Location 1"])]
-
-arrest_table["lat"], arrest_table["long"] = arrest_table["Location 1"].str.split(",").str
-arrest_table["lat"] = arrest_table["lat"].str.replace("(", "").astype(float)
-arrest_table["long"] = arrest_table["long"].str.replace(")", "").astype(float)
-arrest_table
+import matplotlib.pyplot as plt
 ```
+
+## Preprocessing the Data
+
+```python
+legion = pd.read_csv("Legion.2019-06-07.2019-09-02.currency.csv", sep=',')
+legion.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>League</th>
+      <th>Date</th>
+      <th>Get</th>
+      <th>Pay</th>
+      <th>Value</th>
+      <th>Confidence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Legion</td>
+      <td>6/7/2019</td>
+      <td>Orb of Alchemy</td>
+      <td>Chaos Orb</td>
+      <td>0.34000</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Legion</td>
+      <td>6/8/2019</td>
+      <td>Orb of Alchemy</td>
+      <td>Chaos Orb</td>
+      <td>0.27347</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Legion</td>
+      <td>6/9/2019</td>
+      <td>Orb of Alchemy</td>
+      <td>Chaos Orb</td>
+      <td>0.27028</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Legion</td>
+      <td>6/10/2019</td>
+      <td>Orb of Alchemy</td>
+      <td>Chaos Orb</td>
+      <td>0.32258</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Legion</td>
+      <td>6/11/2019</td>
+      <td>Orb of Alchemy</td>
+      <td>Chaos Orb</td>
+      <td>0.32196</td>
+      <td>High</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
