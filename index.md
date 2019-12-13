@@ -12,16 +12,14 @@
 
 1. Path of Exile operates on a system that is known as Leagues. Roughly every 3 months the game receives a major patch which introduces new mechanics, items, and content but also wipes out all existing characters and items from the previous league. This gives the economy of the game a fresh start every 3 months, which allows us to track trends in the valuation of currency across leagues. While the prices of relative price of currency items tends to stabilize as each league progresses, the first month’s economy is incredibly volatile, and a lot of money can be made by understanding the demand for currency items and correctly playing the market. 
 
-
 2. In PoE, people tend to pay for convenience. Unlike most	games, there is not actual in-game designated marketplace. People have to search up on a 3rd party website, for what they want, then message the player for it, and then go to their “hideout” to trade with them. This makes it so that people who want to buy bulk amounts of items, tend to pay a premium to spare them the inconvenience of having to go out of their way to complete multiple trades with different people. This allows for a certain margin of upricing that can be deemed acceptable by the buyer, thus allowing the seller to generate higher profit margins. Because of this bulk upricing, the seller holds an upper hand in trades, and has far more power in dictating price. In most cases buyers are willing to pay premiums of up to even 25% in order to save themselves time.
 
 ## Data Source
-Poeninja is a webstie which has been logging trade data for each league since 2017. Using their datasets found at: https://poe.ninja/data, we are going to be taking data from the previous 5 leagues: Blight, Legion, Synthesis, Betrayal, and Delve. Our tutorial is going to be looking at the ratios between currency items on the market, and observing what trades can be deemed as profitable.
+<p> Poeninja is a webstie which has been logging trade data for each league since 2017. Using their datasets found at: https://poe.ninja/data, we are going to be taking data from the previous 5 leagues: Blight, Legion, Synthesis, Betrayal, and Delve. Our tutorial is going to be looking at the ratios between currency items on the market, and observing what trades can be deemed as profitable. </p>
 
 ### Getting Started
 
-<p> We are going to be utilizing the following imported libraries
- </p>
+<p> We are going to be utilizing the following imported libraries </p>
 ```python
 import pandas as pd
 import numpy as np
