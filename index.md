@@ -1648,7 +1648,7 @@ seaborn.lineplot(x='Day', y='Net Fusing Gain', hue='League', data=fusing).set_ti
 
 
 
-![png](poe_files/poe_9_1.png)
+![g1](poe_9_1.png)
 
 
 
@@ -1671,7 +1671,7 @@ seaborn.lineplot(x='Day', y='Average Net Fusing Gain', data=fusing_average).set_
 
 
 
-![png](poe_files/poe_10_1.png)
+![g2](poe_10_1.png)
 
 
 
