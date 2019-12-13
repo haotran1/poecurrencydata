@@ -303,7 +303,7 @@ legionitems
 <p>1048575 rows × 10 columns</p>
 </div>
 
-<p> The columns of this table has extra columns compared to the currency table. However, in this case, the extra columns do not affect our data so we shall ignore them. The table has a over 1,000,000 rows so we will only be looking at a specific big ticket item known as headhunter.
+<p> The columns of this table has extra columns compared to the currency table. However, in this case, the extra columns do not affect our data so we shall ignore them. The table has a over 1,000,000 rows so we will only be looking at a specific big ticket item known as headhunter. </p>
 
 ```python
 ##legion.loc[legion['Name'] == "Headhunter"]
