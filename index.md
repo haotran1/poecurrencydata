@@ -24,8 +24,8 @@
 <p> Poeninja is a webstie which has been logging trade data for each league since 2017. Using their datasets found at: <a href="https://poe.ninja/data">poe.ninja</a>, we are going to be taking data from the previous 5 leagues: <a href="https://pathofexile.gamepedia.com/Blight_league">Blight</a>, <a href="https://pathofexile.gamepedia.com/Legion_league">Legion</a>, <a href="https://pathofexile.gamepedia.com/Synthesis_league">Synthesis</a>, <a href="https://pathofexile.gamepedia.com/Betrayal_league">Betrayal</a>, and <a href="https://pathofexile.gamepedia.com/Delve_league">Delve</a>. </p>
     
 <p> Our tutorial is going to be analysing:</p>
-    1. The currency pricing trends as each league goes on
-    2. The profitability of flipping currency
+ 1. The currency pricing trends as each league goes on
+ 2. The profitability of flipping currency
 
 ### Getting Started
 
@@ -39,14 +39,13 @@ import matplotlib.pyplot as plt
     
 <p> First we are going to obeserve the trends in pricing of some of the more widely/useful traded currency items. Every item is going to be compared to its price in <a href="https://pathofexile.gamepedia.com/Chaos_Orb">Chaos Orbs</a> as Chaos Orbs are used by players as the main traded currency. </p>
 <p> The currency items we are going to be observing are: </p>
-    - <a href="https://pathofexile.gamepedia.com/Orb_of_Alchemy">Orb of Alchemy</a>
-    - <a href="https://pathofexile.gamepedia.com/Orb_of_Fusing">Orb of Fusing</a>
-    - <a href="https://pathofexile.gamepedia.com/Divine_Orb">Divine Orb</a>
-    - <a href="https://pathofexile.gamepedia.com/Orb_of_Annulment">Orb of Annulment</a>
-    - <a href="https://pathofexile.gamepedia.com/Exalted_Orb">Exalted Orb</a>
-    - <a href="https://pathofexile.gamepedia.com/Mirror_of_Kalandra">Mirror of Kalandra</a>
+ - <a href="https://pathofexile.gamepedia.com/Orb_of_Alchemy">Orb of Alchemy</a>
+ - <a href="https://pathofexile.gamepedia.com/Orb_of_Fusing">Orb of Fusing</a>
+ - <a href="https://pathofexile.gamepedia.com/Divine_Orb">Divine Orb</a>
+ - <a href="https://pathofexile.gamepedia.com/Orb_of_Annulment">Orb of Annulment</a>
+ - <a href="https://pathofexile.gamepedia.com/Exalted_Orb">Exalted Orb</a>
+ - <a href="https://pathofexile.gamepedia.com/Mirror_of_Kalandra">Mirror of Kalandra</a>
     
-
 <p> We are going to import all of our data into a DataFrame. Since we are observing 5 different leagues we are only going to display the table for Legion league in order to avoid unnecessary redunancy as all of the tables will be analysed in the same way. </p>
 
 ```python
