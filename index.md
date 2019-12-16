@@ -34,6 +34,8 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn
+import math
 ```
 ## Observing currency pricing trends 
     
@@ -576,179 +578,13 @@ legion_fusing
 <p>88 rows × 9 columns</p>
 </div>
 
-<p> From this table it can be seen that there are net gains for each day using this method. We then repeat this process for each league that we are observing. </p>
-
-
-```python
-# Blight
-
-# Find conversion between Chaos and Exalted as a simpler multiplier value
-blight_etoc = blight[(blight['Get'] == 'Chaos Orb') & (blight['Pay'] == 'Exalted Orb')].reset_index(drop=True)
-blight_ctoe = blight[(blight['Get'] == 'Exalted Orb') & (blight['Pay'] == 'Chaos Orb')].reset_index(drop=True)
-
-# Find conversion from Chaos Orbs to Orbs of Fusing
-blight_ctof = blight[(blight['Get'] == 'Orb of Fusing') & (blight['Pay'] == 'Chaos Orb')].reset_index(drop=True)
-
-# Use reciprocal to find value received with payment of 1 item
-for index, row in blight_etoc.iterrows():
-    blight_etoc.loc[index, 'Chaos per Exalted'] = 1 / blight_etoc.loc[index, 'Value']
-    blight_ctoe.loc[index, 'Exalted per Chaos'] = 1 / blight_ctoe.loc[index, 'Value']
-    blight_ctof.loc[index, 'Fusing per Chaos'] = 1 / blight_ctof.loc[index, 'Value']
-
-blight_ftoe = blight[(blight['Get'] == 'Chaos Orb') & (blight['Pay'] == 'Orb of Fusing')].reset_index(drop=True)
-
-# Take reciprocal of Exalted per Fusing to find starting number of Fusings
-for index, row in blight_ftoe.iterrows():
-    blight_ftoe.loc[index, 'Chaos per Fusing'] = 1 / blight_ftoe.loc[index, 'Value']
-    blight_ftoe.loc[index, 'Exalted per Fusing'] = blight_ftoe.loc[index, 'Chaos per Fusing'] / blight_ctoe.loc[index, 'Value']
-
-# Slice and format dataframe to store the start and end Orb of Fusing numbers
-blight_fusing = blight[(blight['Get'] == 'Chaos Orb') & (blight['Pay'] == 'Exalted Orb')]
-blight_fusing = blight_fusing.reset_index(drop=True).drop('Get', axis=1).drop('Pay', axis=1).drop('Value', axis=1).drop('Confidence', axis=1)
-
-for index, row in blight_fusing.iterrows():
-    blight_fusing.loc[index, 'Start Fusings'] = 1 / blight_ftoe.loc[index, 'Exalted per Fusing']
-    blight_fusing.loc[index, 'End Fusings'] = blight_etoc.loc[index, 'Chaos per Exalted'] * blight_ctof.loc[index, 'Fusing per Chaos']
-
-for index, row in blight_fusing.iterrows():
-    blight_fusing.loc[index, 'Fusings Saved'] = blight_fusing.loc[index, 'Start Fusings'] * premium
-    blight_fusing.loc[index, 'Bulk Fusing Buy'] = blight_fusing.loc[index, 'End Fusings'] * (1 + premium)
-    blight_fusing.loc[index, 'New End Fusings'] = blight_fusing.loc[index, 'Fusings Saved'] + blight_fusing.loc[index, 'Bulk Fusing Buy']
-    blight_fusing.loc[index, 'Net Fusing Gain'] = blight_fusing.loc[index, 'New End Fusings'] - blight_fusing.loc[index, 'End Fusings']
-    # Add day column to make easier to plot
-    blight_fusing.loc[index, 'Day'] = index
-    
-```
-
-```python
-# Synthesis
-
-# Find conversion between Chaos and Exalted as a simpler multiplier value
-synthesis_etoc = synthesis[(synthesis['Get'] == 'Chaos Orb') & (synthesis['Pay'] == 'Exalted Orb')][1:].reset_index(drop=True)
-synthesis_ctoe = synthesis[(synthesis['Get'] == 'Exalted Orb') & (synthesis['Pay'] == 'Chaos Orb')].reset_index(drop=True)
-# Find conversion from Chaos Orbs to Orbs of Fusing
-synthesis_ctof = synthesis[(synthesis['Get'] == 'Orb of Fusing') & (synthesis['Pay'] == 'Chaos Orb')][1:].reset_index(drop=True)
-
-# Use reciprocal to find value received with payment of 1 item
-
-for index, row in synthesis_etoc.iterrows():
-    synthesis_etoc.loc[index, 'Chaos per Exalted'] = 1 / synthesis_etoc.loc[index, 'Value']
-    synthesis_ctoe.loc[index, 'Exalted per Chaos'] = 1 / synthesis_ctoe.loc[index, 'Value']
-    synthesis_ctof.loc[index, 'Fusing per Chaos'] = 1 / synthesis_ctof.loc[index, 'Value']
-
-synthesis_ftoe = synthesis[(synthesis['Get'] == 'Chaos Orb') & (synthesis['Pay'] == 'Orb of Fusing')][1:].reset_index(drop=True)
-
-# Take reciprocal of Exalted per Fusing to find starting number of Fusings
-for index, row in synthesis_ftoe.iterrows():
-    synthesis_ftoe.loc[index, 'Chaos per Fusing'] = 1 / synthesis_ftoe.loc[index, 'Value']
-    synthesis_ftoe.loc[index, 'Exalted per Fusing'] = synthesis_ftoe.loc[index, 'Chaos per Fusing'] / synthesis_ctoe.loc[index, 'Value']
-
-# Slice and format dataframe to store the start and end Orb of Fusing numbers
-synthesis_fusing = synthesis[(synthesis['Get'] == 'Chaos Orb') & (synthesis['Pay'] == 'Exalted Orb')][1:]
-synthesis_fusing = synthesis_fusing.reset_index(drop=True).drop('Get', axis=1).drop('Pay', axis=1).drop('Value', axis=1).drop('Confidence', axis=1)
-
-for index, row in synthesis_fusing.iterrows():
-    synthesis_fusing.loc[index, 'Start Fusings'] = 1 / synthesis_ftoe.loc[index, 'Exalted per Fusing']
-    synthesis_fusing.loc[index, 'End Fusings'] = synthesis_etoc.loc[index, 'Chaos per Exalted'] * synthesis_ctof.loc[index, 'Fusing per Chaos']
-
-for index, row in synthesis_fusing.iterrows():
-    synthesis_fusing.loc[index, 'Fusings Saved'] = synthesis_fusing.loc[index, 'Start Fusings'] * premium
-    synthesis_fusing.loc[index, 'Bulk Fusing Buy'] = synthesis_fusing.loc[index, 'End Fusings'] * (1 + premium)
-    synthesis_fusing.loc[index, 'New End Fusings'] = synthesis_fusing.loc[index, 'Fusings Saved'] + synthesis_fusing.loc[index, 'Bulk Fusing Buy']
-    synthesis_fusing.loc[index, 'Net Fusing Gain'] = synthesis_fusing.loc[index, 'New End Fusings'] - synthesis_fusing.loc[index, 'End Fusings']
-    # Add day column to make easier to plot
-    synthesis_fusing.loc[index, 'Day'] = index
-```
-
-```python
-# Betrayal
-
-# Find conversion between Chaos and Exalted as a simpler multiplier value
-betrayal_etoc = betrayal[(betrayal['Get'] == 'Chaos Orb') & (betrayal['Pay'] == 'Exalted Orb')].reset_index(drop=True)
-betrayal_ctoe = betrayal[(betrayal['Get'] == 'Exalted Orb') & (betrayal['Pay'] == 'Chaos Orb')].reset_index(drop=True)
-
-# Find conversion from Chaos Orbs to Orbs of Fusing
-betrayal_ctof = betrayal[(betrayal['Get'] == 'Orb of Fusing') & (betrayal['Pay'] == 'Chaos Orb')].reset_index(drop=True)
-
-# Use reciprocal to find value received with payment of 1 item
-for index, row in betrayal_etoc.iterrows():
-    betrayal_etoc.loc[index, 'Chaos per Exalted'] = 1 / betrayal_etoc.loc[index, 'Value']
-    betrayal_ctoe.loc[index, 'Exalted per Chaos'] = 1 / betrayal_ctoe.loc[index, 'Value']
-    betrayal_ctof.loc[index, 'Fusing per Chaos'] = 1 / betrayal_ctof.loc[index, 'Value']
-
-betrayal_ftoe = betrayal[(betrayal['Get'] == 'Chaos Orb') & (betrayal['Pay'] == 'Orb of Fusing')].reset_index(drop=True)
-
-# Take reciprocal of Exalted per Fusing to find starting number of Fusings
-for index, row in betrayal_ftoe.iterrows():
-    betrayal_ftoe.loc[index, 'Chaos per Fusing'] = 1 / betrayal_ftoe.loc[index, 'Value']
-    betrayal_ftoe.loc[index, 'Exalted per Fusing'] = betrayal_ftoe.loc[index, 'Chaos per Fusing'] / betrayal_ctoe.loc[index, 'Value']
-
-# Slice and format dataframe to store the start and end Orb of Fusing numbers
-betrayal_fusing = betrayal[(betrayal['Get'] == 'Chaos Orb') & (betrayal['Pay'] == 'Exalted Orb')]
-betrayal_fusing = betrayal_fusing.reset_index(drop=True).drop('Get', axis=1).drop('Pay', axis=1).drop('Value', axis=1).drop('Confidence', axis=1)
-
-for index, row in betrayal_fusing.iterrows():
-    betrayal_fusing.loc[index, 'Start Fusings'] = 1 / betrayal_ftoe.loc[index, 'Exalted per Fusing']
-    betrayal_fusing.loc[index, 'End Fusings'] = betrayal_etoc.loc[index, 'Chaos per Exalted'] * betrayal_ctof.loc[index, 'Fusing per Chaos']
-
-for index, row in betrayal_fusing.iterrows():
-    betrayal_fusing.loc[index, 'Fusings Saved'] = betrayal_fusing.loc[index, 'Start Fusings'] * premium
-    betrayal_fusing.loc[index, 'Bulk Fusing Buy'] = betrayal_fusing.loc[index, 'End Fusings'] * (1 + premium)
-    betrayal_fusing.loc[index, 'New End Fusings'] = betrayal_fusing.loc[index, 'Fusings Saved'] + betrayal_fusing.loc[index, 'Bulk Fusing Buy']
-    betrayal_fusing.loc[index, 'Net Fusing Gain'] = betrayal_fusing.loc[index, 'New End Fusings'] - betrayal_fusing.loc[index, 'End Fusings']
-    # Add day column to make easier to plot
-    betrayal_fusing.loc[index, 'Day'] = index
-```
-
-```python
-# Delve
-
-# Find conversion between Chaos and Exalted as a simpler multiplier value
-delve_etoc = delve[(delve['Get'] == 'Chaos Orb') & (delve['Pay'] == 'Exalted Orb')].reset_index(drop=True)
-delve_ctoe = delve[(delve['Get'] == 'Exalted Orb') & (delve['Pay'] == 'Chaos Orb')].reset_index(drop=True)
-
-# Find conversion from Chaos Orbs to Orbs of Fusing
-delve_ctof = delve[(delve['Get'] == 'Orb of Fusing') & (delve['Pay'] == 'Chaos Orb')].reset_index(drop=True)
-
-# Use reciprocal to find value received with payment of 1 item
-for index, row in delve_etoc.iterrows():
-    delve_etoc.loc[index, 'Chaos per Exalted'] = 1 / delve_etoc.loc[index, 'Value']
-    delve_ctoe.loc[index, 'Exalted per Chaos'] = 1 / delve_ctoe.loc[index, 'Value']
-    delve_ctof.loc[index, 'Fusing per Chaos'] = 1 / delve_ctof.loc[index, 'Value']
-
-delve_ftoe = delve[(delve['Get'] == 'Chaos Orb') & (delve['Pay'] == 'Orb of Fusing')].reset_index(drop=True)
-
-# Take reciprocal of Exalted per Fusing to find starting number of Fusings
-for index, row in delve_ftoe.iterrows():
-    delve_ftoe.loc[index, 'Chaos per Fusing'] = 1 / delve_ftoe.loc[index, 'Value']
-    delve_ftoe.loc[index, 'Exalted per Fusing'] = delve_ftoe.loc[index, 'Chaos per Fusing'] / delve_ctoe.loc[index, 'Value']
-
-# Slice and format dataframe to store the start and end Orb of Fusing numbers
-delve_fusing = delve[(delve['Get'] == 'Chaos Orb') & (delve['Pay'] == 'Exalted Orb')]
-delve_fusing = delve_fusing.reset_index(drop=True).drop('Get', axis=1).drop('Pay', axis=1).drop('Value', axis=1).drop('Confidence', axis=1)
-
-for index, row in delve_fusing.iterrows():
-    delve_fusing.loc[index, 'Start Fusings'] = 1 / delve_ftoe.loc[index, 'Exalted per Fusing']
-    delve_fusing.loc[index, 'End Fusings'] = delve_etoc.loc[index, 'Chaos per Exalted'] * delve_ctof.loc[index, 'Fusing per Chaos']
-
-for index, row in delve_fusing.iterrows():
-    delve_fusing.loc[index, 'Fusings Saved'] = delve_fusing.loc[index, 'Start Fusings'] * premium
-    delve_fusing.loc[index, 'Bulk Fusing Buy'] = delve_fusing.loc[index, 'End Fusings'] * (1 + premium)
-    delve_fusing.loc[index, 'New End Fusings'] = delve_fusing.loc[index, 'Fusings Saved'] + delve_fusing.loc[index, 'Bulk Fusing Buy']
-    delve_fusing.loc[index, 'Net Fusing Gain'] = delve_fusing.loc[index, 'New End Fusings'] - delve_fusing.loc[index, 'End Fusings']
-    # Add day column to make easier to plot
-    delve_fusing.loc[index, 'Day'] = index
-    
-```
+<p> From this table it can be seen that there are net gains for each day using this method. We then repeat this process for each league that we are observing and then concat all the data into one dataframe. (Omitted as to not repeat the exact same code) </p>
 
 ```python
 # Concat data from every league
 fusing = pd.concat([betrayal_fusing, blight_fusing, delve_fusing, legion_fusing, synthesis_fusing])
 fusing
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -917,23 +753,15 @@ fusing
 <p>455 rows × 9 columns</p>
 </div>
 
-
-
+<p> We can then take these values and plot them as well as take the averages for all the leagues. <p>
 
 ```python
 seaborn.lineplot(x='Day', y='Net Fusing Gain', hue='League', data=fusing).set_title('Multi-Tiered Fusing Orb Flipping: Profitability')
 ```
-
-
-
-
     Text(0.5, 1.0, 'Multi-Tiered Fusing Orb Flipping: Profitability')
 
 
-
-
 ![g1](poe_9_1.png)
-
 
 
 ```python
@@ -947,17 +775,9 @@ for i in range(88):
 seaborn.lineplot(x='Day', y='Average Net Fusing Gain', data=fusing_average).set_title('Multi-Tiered Fusing Orb Flipping: Profitability')
 ```
 
-
-
-
     Text(0.5, 1.0, 'Multi-Tiered Fusing Orb Flipping: Profitability')
 
-
-
-
 ![g2](poe_10_1.png)
-
-
 
 ```python
 # Find the maximum average profit value and day
@@ -969,9 +789,9 @@ print('Max Value: ', round(max_value, 2), ' Day: ', max_day)
 
     Max Value:  96.79  Day:  47
 
+<p> We can see that the profitability spikes up at the beginning of the league, then steadily increases until around day 50. In terms of feasability, it would seem quite difficult to obtain enough currency to start any efficient flipping scheme within the first week, so this kind of strategy would most likely be best done towards the middle of the league.
+    
+## Overall Results
 
-
-```python
-
-```
+<p> Our analysis of the Path of Exile economy resulted in findings that are actually quite beneficial to one another. We looked at the trend in currency item pricing of some of the most used currencies in the game, as well as the profitability of a currency flipping strategy. First, we found that Orbs of Fusing and Alchemy tend to greatly increase in price for the first two weeks of the league, after which they drop off. This means that in the early league, one should most likely try to invest in one of these two currencies and then sell sometime around the 2 week mark in order to make maximal profit.Secondly. we found that our flipping strategy does not tend to be as profitable during the first few weeks of the league. However, past the 15 day mark its profitability tends to steadily increase until hitting a peak around day 50. These two strategies can be used in conjustion with one another in order for one to maximize their profits. Start out my hoarding Fusings and Alchemys, and once you cash out at the 2 week mark, switch to flipping currencies. </p>
 
