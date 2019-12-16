@@ -1,4 +1,4 @@
-# An Analysis of the Path of Exile League Economy
+# An Analysis of the Path of Exile Economy
 ![Title]($$$$$.png)
 
 ## Introduction
