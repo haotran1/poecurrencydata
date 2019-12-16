@@ -71,27 +71,27 @@ plt.show()
 ```
 
 
-![png](final_proj_files/final_proj_2_0.png)
+![png](final_proj_2_0.png)
 
 
 
-![png](final_proj_files/final_proj_2_1.png)
+![png](final_proj_2_1.png)
 
 
 
-![png](final_proj_files/final_proj_2_2.png)
+![png](final_proj_2_2.png)
 
 
 
-![png](final_proj_files/final_proj_2_3.png)
+![png](final_proj_2_3.png)
 
 
 
-![png](final_proj_files/final_proj_2_4.png)
+![png](final_proj_2_4.png)
 
 
 
-![png](final_proj_files/final_proj_2_5.png)
+![png](final_proj_2_5.png)
 
 
 
@@ -139,30 +139,25 @@ for item, item_data in combined_data.groupby(['Get']):
 
 
 
-![png](final_proj_files/final_proj_3_1.png)
+![png](final_proj_3_1.png)
 
 
 
-![png](final_proj_files/final_proj_3_2.png)
+![png](final_proj_3_2.png)
 
 
 
-![png](final_proj_files/final_proj_3_3.png)
+![png](final_proj_3_3.png)
 
 
 
-![png](final_proj_files/final_proj_3_4.png)
+![png](final_proj_3_4.png)
 
 
 
-![png](final_proj_files/final_proj_3_5.png)
+![png](final_proj_3_5.png)
 
 
 
-![png](final_proj_files/final_proj_3_6.png)
+![png](final_proj_3_6.png)
 
-
-
-```python
-
-```
