@@ -184,7 +184,7 @@ for league in league_data:
 combined_data = pd.concat(league_data.values(), axis=0)
 ```
 
-<p> Finally we plot our data. We are first going to look at the prices of each item for the 5 specified leagues.
+<p> Finally we plot our data. We are first going to look at the prices of each item for the 5 specified leagues. </p>
 
 ![chaos_ratios](Curr_Chaos.png)
 
