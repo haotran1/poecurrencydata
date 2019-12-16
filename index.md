@@ -21,11 +21,11 @@
 <p> While there are many different currency items in the game. The Chaos Orb </p>
 
 ### Data Source
-<p> Poeninja is a webstie which has been logging trade data for each league since 2017. Using their datasets found at: <a href="https://poe.ninja/data">poe.ninja</a>, we are going to be taking data from the previous 5 leagues: Blight, Legion, Synthesis, Betrayal, and Delve. </p>
+<p> Poeninja is a webstie which has been logging trade data for each league since 2017. Using their datasets found at: <a href="https://poe.ninja/data">poe.ninja</a>, we are going to be taking data from the previous 5 leagues: <a href="https://pathofexile.gamepedia.com/Blight_league">Blight</a>, <a href="https://pathofexile.gamepedia.com/Legion_league">Legion</a>, <a href="https://pathofexile.gamepedia.com/Synthesis_league">Synthesis</a>, <a href="https://pathofexile.gamepedia.com/Betrayal_league">Betrayal</a>, and <a href="https://pathofexile.gamepedia.com/Delve_league">Delve</a>. </p>
     
-<p> Our tutorial is going to be analysing:
+<p> Our tutorial is going to be analysing:</p>
     1. The currency pricing trends as each league goes on
-    2. The profitability of flipping currency </p>
+    2. The profitability of flipping currency
 
 ### Getting Started
 
