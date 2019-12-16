@@ -1,4 +1,5 @@
 # An Analysis of the Path of Exile Economy
+<p> By: Brian Tran, Francis Poon, and Kyle Chan </p>
 ![Title]($$$$$.png)
 
 ## Introduction
@@ -794,4 +795,5 @@ print('Max Value: ', round(max_value, 2), ' Day: ', max_day)
 ## Overall Results
 
 <p> Our analysis of the Path of Exile economy resulted in findings that are actually quite beneficial to one another. We looked at the trend in currency item pricing of some of the most used currencies in the game, as well as the profitability of a currency flipping strategy. First, we found that Orbs of Fusing and Alchemy tend to greatly increase in price for the first two weeks of the league, after which they drop off. This means that in the early league, one should most likely try to invest in one of these two currencies and then sell sometime around the 2 week mark in order to make maximal profit.Secondly. we found that our flipping strategy does not tend to be as profitable during the first few weeks of the league. However, past the 15 day mark its profitability tends to steadily increase until hitting a peak around day 50. These two strategies can be used in conjustion with one another in order for one to maximize their profits. Start out my hoarding Fusings and Alchemys, and once you cash out at the 2 week mark, switch to flipping currencies. </p>
+<p> Thanks for reading and best of luck in your currency making endeavors exiles!</p>
 
