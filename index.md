@@ -21,7 +21,11 @@
 <p> While there are many different currency items in the game. The Chaos Orb </p>
 
 ### Data Source
-<p> Poeninja is a webstie which has been logging trade data for each league since 2017. Using their datasets found at: <a href="https://poe.ninja/data">poe.ninja</a>, we are going to be taking data from the previous 5 leagues: Blight, Legion, Synthesis, Betrayal, and Delve. Our tutorial is going to be looking at the ratios between currency items on the market, and observing what trades can be deemed as profitable. </p>
+<p> Poeninja is a webstie which has been logging trade data for each league since 2017. Using their datasets found at: <a href="https://poe.ninja/data">poe.ninja</a>, we are going to be taking data from the previous 5 leagues: Blight, Legion, Synthesis, Betrayal, and Delve. </p>
+    
+<p> Our tutorial is going to be analysing:
+    1. The currency pricing trends as each league goes on
+    2. The profitability of flipping currency </p>
 
 ### Getting Started
 
@@ -31,12 +35,29 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 ```
+## Observing currency pricing trends 
+    
+<p> First we are going to obeserve the trends in pricing of some of the more widely/useful traded currency items. Every item is going to be compared to its price in <a href="https://pathofexile.gamepedia.com/Chaos_Orb">Chaos Orbs</a> as Chaos Orbs are used by players as the main traded currency. </p>
+<p> The currency items we are going to be observing are: </p>
+    - <a href="https://pathofexile.gamepedia.com/Orb_of_Alchemy">Orb of Alchemy</a>
+    - <a href="https://pathofexile.gamepedia.com/Orb_of_Fusing">Orb of Fusing</a>
+    - <a href="https://pathofexile.gamepedia.com/Divine_Orb">Divine Orb</a>
+    - <a href="https://pathofexile.gamepedia.com/Orb_of_Annulment">Orb of Annulment</a>
+    - <a href="https://pathofexile.gamepedia.com/Exalted_Orb">Exalted Orb</a>
+    - <a href="https://pathofexile.gamepedia.com/Mirror_of_Kalandra">Mirror of Kalandra</a>
+    
 
-## Preprocessing the Data
+<p> We are going to import all of our data into a DataFrame. Since we are observing 5 different leagues we are only going to display the table for Legion league in order to avoid unnecessary redunancy as all of the tables will be analysed in the same way. </p>
 
 ```python
-legion = pd.read_csv("Legion.2019-06-07.2019-09-02.currency.csv", sep=',')
-legion.head()
+## Importing data from csv files based on each league
+    league_data = {}
+    league_data['Blight'] = pd.read_csv('Blight.2019-09-06.2019-12-09.currency.csv', sep=';')
+    league_data['Legion'] = pd.read_csv('Legion.2019-06-07.2019-09-02.currency.csv', sep=';')
+    league_data['Synthesis'] = pd.read_csv('Synthesis.2019-03-08.2019-06-04.currency.csv', sep=';')
+    league_data['Betrayal'] = pd.read_csv('Betrayal.2018-12-07.2019-03-05.currency.csv', sep=';')
+    league_data['Delve'] = pd.read_csv('Delve.2018-08-31.2018-12-03.currency.csv', sep=';')
+    league_data['Legion'].head()
 ```
 <div>
 <style scoped>
@@ -124,6 +145,7 @@ The above table is the dataset for currency items in Legion League. Further info
  - Value: How many of the currency the buyer must pay for 1 of the "Get" item
  - Confidence: Poeninja's confidence in the value
  
+ # 
  # KYLES SHIT
  
  
