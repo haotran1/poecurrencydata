@@ -37,7 +37,7 @@ import matplotlib.pyplot as plt
 ```
 ## Observing currency pricing trends 
     
-<p> First we are going to obeserve the trends in pricing of some of the more widely/useful traded currency items. Every item is going to be compared to its price in <a href="https://pathofexile.gamepedia.com/Chaos_Orb">Chaos Orbs</a> as Chaos Orbs are used by players as the main traded currency. </p>
+<p> First we are going to obeserve the trends in pricing of some of the more widely/useful traded currency items. The point of this is to see which items tend to increase in price the greatest as a league goes on, this way we will know which items to hoard at the beginning of the league in order to sell later to make the most profit. Every item is going to be compared to its price in <a href="https://pathofexile.gamepedia.com/Chaos_Orb">Chaos Orbs</a> as Chaos Orbs are used by players as the main traded currency. </p>
 <p> The currency items we are going to be observing are: </p>
  - <a href="https://pathofexile.gamepedia.com/Orb_of_Alchemy">Orb of Alchemy</a>
  - <a href="https://pathofexile.gamepedia.com/Orb_of_Fusing">Orb of Fusing</a>
@@ -144,7 +144,7 @@ The above table is the dataset for currency items in Legion League. Further info
  - Value: How many of the currency the buyer must pay for 1 of the "Get" item
  - Confidence: Poeninja's confidence in the value
  
- <p> Now we must clean the data by removing unwanted rows, removing any rows that do not contain data that we are interested. </p>
+ <p> Now we must clean the data by removing unwanted rows, removing any rows that do not contain data that we are interested in. </p>
 
 ```python
 ## Data Cleaning
@@ -183,11 +183,13 @@ for league in league_data:
 # Combining the individual leagues into one dataframe
 combined_data = pd.concat(league_data.values(), axis=0)
 ```
- 
- ## KYLES SHIT
- 
- 
 
+<p> Finally we plot our data. We are first going to look at the prices of each item for the 5 specified leagues.
+
+![chaos_ratios](curr_chaos.png)
+
+
+## KYLES SHIT
 ```python
 # Find conversion between Chaos and Exalted as a simpler multiplier value
 legion_etoc = legion[(legion['Get'] == 'Chaos Orb') & (legion['Pay'] == 'Exalted Orb')].reset_index(drop=True)
