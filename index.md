@@ -753,7 +753,7 @@ fusing
 <p>455 rows × 9 columns</p>
 </div>
 
-<p> We can then take these values and plot them as well as take the averages for all the leagues. <p>
+<p> We can then take these values and plot them as well as take the averages for all the leagues. </p>
 
 ```python
 seaborn.lineplot(x='Day', y='Net Fusing Gain', hue='League', data=fusing).set_title('Multi-Tiered Fusing Orb Flipping: Profitability')
