@@ -789,7 +789,7 @@ print('Max Value: ', round(max_value, 2), ' Day: ', max_day)
 
     Max Value:  96.79  Day:  47
 
-<p> We can see that the profitability spikes up at the beginning of the league, then steadily increases until around day 50. In terms of feasability, it would seem quite difficult to obtain enough currency to start any efficient flipping scheme within the first week, so this kind of strategy would most likely be best done towards the middle of the league.
+<p> We can see that the profitability spikes up at the beginning of the league, then steadily increases until around day 50. In terms of feasability, it would seem quite difficult to obtain enough currency to start any efficient flipping scheme within the first week, so this kind of strategy would most likely be best done towards the middle of the league. </p>
     
 ## Overall Results
 
