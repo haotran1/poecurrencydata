@@ -18,7 +18,7 @@
 
 - In PoE, people tend to pay for convenience. Unlike most games, there is not actual in-game designated marketplace. People have to search up on a <a href="http://poe.trade/">3rd party website</a>, for what they want, then message the player for it, and then go to their “hideout” to trade with them. This makes it so that people who want to buy bulk amounts of items, tend to pay a premium to spare them the inconvenience of having to go out of their way to complete multiple trades with different people. This allows for a certain margin of upricing that can be deemed acceptable by the buyer, thus allowing the seller to generate higher profit margins. Because of this bulk upricing, the seller holds an upper hand in trades, and has far more power in dictating price. In most cases buyers are willing to pay premiums of up to even 25% in order to save themselves time.
 
-<p> While there are many different currency items in the game. The Chaos Orb </p>
+<p> It should also be noted that while there are many different currency items in the game. The Chaos Orb tends to be used as the basis for all pricing. For the most part, the price of items tends to be listed in terms of Chaos Orbs. Because of this we fact, we are mostly going to refer to our prices in terms of Chaos Orbs as that is the most commonly used currency.</p>
 
 ### Data Source
 <p> Poeninja is a webstie which has been logging trade data for each league since 2017. Using their datasets found at: <a href="https://poe.ninja/data">poe.ninja</a>, we are going to be taking data from the previous 5 leagues: <a href="https://pathofexile.gamepedia.com/Blight_league">Blight</a>, <a href="https://pathofexile.gamepedia.com/Legion_league">Legion</a>, <a href="https://pathofexile.gamepedia.com/Synthesis_league">Synthesis</a>, <a href="https://pathofexile.gamepedia.com/Betrayal_league">Betrayal</a>, and <a href="https://pathofexile.gamepedia.com/Delve_league">Delve</a>. </p>
@@ -144,8 +144,28 @@ The above table is the dataset for currency items in Legion League. Further info
  - Value: How many of the currency the buyer must pay for 1 of the "Get" item
  - Confidence: Poeninja's confidence in the value
  
- # 
- # KYLES SHIT
+ Now we must clean the data by removing unwanted rows, removing any rows that do not contain data that we are interested.
+
+```python
+## Data Cleaning
+# Remove 'Confidence' column from all data sets
+# Only keep items that are in focus items
+focus_items = ['Orb of Alchemy', 'Orb of Fusing', 'Divine Orb', 'Exalted Orb', 'Mirror of Kalandra', 'Orb of Annulment']
+start_dates = {}
+
+
+for league in league_data:
+    data = league_data[league]
+    data = league_data[league].drop('Confidence', axis=1)
+    data = data[(data['Get'].isin(focus_items)) & (data['Pay'] == 'Chaos Orb')]
+    
+    league_data[league] = data.reset_index(drop=True)
+    # Save the start date of each league
+    start_dates[league] = datetime.strptime(league_data[league]['Date'][0], '%Y-%m-%d')
+```
+ 
+ 
+ ## KYLES SHIT
  
  
 
