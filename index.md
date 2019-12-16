@@ -188,6 +188,46 @@ combined_data = pd.concat(league_data.values(), axis=0)
 
 ![chaos_ratios](Curr_Chaos.png)
 
+<p> We can also observe the averages of the values of each graph. And use this graph to determine when the values of each given currency tends to reach its peak.</p>
+
+```python
+# Find last day that have data for all regions across each item
+last_day = {}
+for item, item_data in combined_data.groupby(['Get']):
+    days = []
+    for league, data in item_data.groupby(['League']):
+        days += [data['Day'].max()]
+        
+    last_day[item] = min(days)
+    
+# Create a new dataframe for the average values and create a seperate plot for each item
+for item, item_data in combined_data.groupby(['Get']):
+    dict_data = {
+        'Average Values': [],
+        'Day': list(range(1,last_day[item]+1))
+    }
+    
+    # Find the average value of each day
+    for day in range(1, last_day[item]+1):
+        dict_data['Average Values'] += [item_data[item_data.Day == day]['Value'].mean()]
+        
+    # Create plot from the dataframe to visualize the max trend
+    df = pd.DataFrame.from_dict(dict_data)
+    ax = df.plot(x='Day', y='Average Values', kind='line', title=item)
+    ax.set_ylabel('Average Chaos Orb/{}'.format(item))
+    
+    max_value = df['Average Values'].max()
+    max_day = df[df['Average Values'] == max_value]['Day'].reset_index(drop=True)[0]
+    print('{} reached a max value of {} on {}.'.format(item, round(max_value, 2), max_day))
+
+```
+    Divine Orb reached a max value of 24.39 on 65.
+    Exalted Orb reached a max value of 173.37 on 54.
+    Mirror of Kalandra reached a max value of 35177.69 on 88.
+    Orb of Alchemy reached a max value of 0.52 on 15.
+    Orb of Annulment reached a max value of 41.84 on 86.
+    Orb of Fusing reached a max value of 0.54 on 14.
+
 
 ## KYLES SHIT
 ```python
