@@ -144,7 +144,7 @@ The above table is the dataset for currency items in Legion League. Further info
  - Value: How many of the currency the buyer must pay for 1 of the "Get" item
  - Confidence: Poeninja's confidence in the value
  
- Now we must clean the data by removing unwanted rows, removing any rows that do not contain data that we are interested.
+ <p> Now we must clean the data by removing unwanted rows, removing any rows that do not contain data that we are interested. </p>
 
 ```python
 ## Data Cleaning
@@ -163,7 +163,26 @@ for league in league_data:
     # Save the start date of each league
     start_dates[league] = datetime.strptime(league_data[league]['Date'][0], '%Y-%m-%d')
 ```
- 
+<p> Then we need to reshape the data in the columns so that it shall be usable. In our case we are going to look at each league relative to the first day of that given league. That way it shall be easier to graph each point over time. </p>
+
+```python
+## Data Shaping
+# Add column that sets the relative day from start date of each league
+for league in league_data:
+    data = league_data[league]
+    start_date = start_dates[league]
+    relative_day = []
+    
+    for date in data['Date']:
+        converted_date = datetime.strptime(date, '%Y-%m-%d')
+        date_dif = (converted_date - start_date).days
+        relative_day += [date_dif + 1]
+        
+    data['Day'] = relative_day
+    
+# Combining the individual leagues into one dataframe
+combined_data = pd.concat(league_data.values(), axis=0)
+```
  
  ## KYLES SHIT
  
