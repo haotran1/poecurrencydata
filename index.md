@@ -228,6 +228,9 @@ for item, item_data in combined_data.groupby(['Get']):
     Orb of Annulment reached a max value of 41.84 on 86.
     Orb of Fusing reached a max value of 0.54 on 14.
 
+![Avg](Curr_Chaos_Avg.png)
+
+<p> From our data we can see that Orb of Fusings, Orbs of Alchemys, and Exalted Orbs all have the most sharp increases in price over the smallest span of time. However, Orb of Alchemys can be seen to have fairly steep drops in price going into the 20 to 50 day mark, while exalts tend to stabilize and fusings slightly decreasing. For our goal of making short term profit in the beginning of the league, it would seem that hoarding Orbs of Fusing and Alchemys can be quite profitale should they be sold within the first 10-15 days. Howveer, for longer term investment Exalted orbs tend to continue to increase in value intil the 1 month mark.</p>
 
 ## KYLES SHIT
 ```python
